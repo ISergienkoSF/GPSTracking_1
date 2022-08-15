@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface RunDAO {
+interface RunDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRun(run: Run)
 
