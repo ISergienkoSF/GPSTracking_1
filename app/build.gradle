@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
     id "androidx.navigation.safeargs.kotlin"
     id 'dagger.hilt.android.plugin'
 }
@@ -45,7 +46,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Material Design
-    implementation 'com.google.android.material:material:1.7.0-beta01'
+    //implementation 'com.google.android.material:material:1.7.0-beta01'
 
     // Architectural Components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
@@ -66,8 +67,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 
     // Navigation Components
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.1"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'

@@ -2,17 +2,31 @@ package com.viol4tsf.gpstracking.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.viol4tsf.gpstracking.R
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    //@Inject
-    //lateinit var runDao: RunDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //Log.d("runDao", "RUNDAO: ${runDao.hashCode()}")
+
+        setSupportActionBar(toolbar)
+        bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
+
+        //прослушивание изменений для нижней навигации и скрытие панели в некоторых фрагментах
+        navHostFragment.findNavController()
+            .addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.id) {
+                    R.id.settingsFragment, R.id.runFragment, R.id.statisticsFragment ->
+                        bottomNavigationView.visibility = View.VISIBLE
+                    else -> bottomNavigationView.visibility = View.GONE
+                }
+            }
     }
 }
