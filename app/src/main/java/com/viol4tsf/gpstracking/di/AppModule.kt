@@ -2,7 +2,7 @@ package com.viol4tsf.gpstracking.di
 
 import android.content.Context
 import androidx.room.Room
-import com.viol4tsf.gpstracking.const.Constants.RUNNING_DB_NAME
+import com.viol4tsf.gpstracking.other.Constants.RUNNING_DB_NAME
 import com.viol4tsf.gpstracking.db.RunningDatabase
 import dagger.Module
 import dagger.Provides

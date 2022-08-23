@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/drawable/bottom_nav_selector.xml" value="0.1885" />
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/drawable/ic_add_black.xml" value="0.1885" />
+        <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/drawable/ic_directions_run_black_24dp.xml" value="0.1885" />
+        <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/drawable/ic_settings.xml" value="0.1885" />
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/layout-land/fragment_statistics.xml" value="0.33541666666666664" />
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/layout-land/fragment_tracking.xml" value="0.2515625" />
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/layout/activity_main.xml" value="0.275" />
