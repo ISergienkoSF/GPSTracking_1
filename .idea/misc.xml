@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/drawable/bottom_nav_selector.xml" value="0.1885" />
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/drawable/ic_add_black.xml" value="0.1885" />
+        <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/drawable/ic_delete.xml" value="0.182" />
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/drawable/ic_directions_run_black_24dp.xml" value="0.1885" />
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/drawable/ic_settings.xml" value="0.1885" />
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/layout-land/fragment_statistics.xml" value="0.33541666666666664" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/layout/list_item_run.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/menu/bottom_nav_menu.xml" value="0.275" />
         <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/menu/botton_nav_menu.xml" value="0.20625" />
+        <entry key="..\:/Users/79186/AndroidStudioProjects/KOTLINTRAINING/GPSTracking/app/src/main/res/menu/toolbar_tracking_menu.xml" value="0.275" />
       </map>
     </option>
   </component>

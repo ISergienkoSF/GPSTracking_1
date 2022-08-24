@@ -34,23 +34,33 @@ import com.viol4tsf.gpstracking.other.Constants.NOTIFICATION_ID
 import com.viol4tsf.gpstracking.other.Constants.TIMER_UPDATE_INTERVAL
 import com.viol4tsf.gpstracking.other.TrackingUtility
 import com.viol4tsf.gpstracking.ui.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
 typealias Polyline = MutableList<LatLng> //список координат
 typealias Polylines = MutableList<Polyline> //список списков координат
 
 //фоновая служба
+@AndroidEntryPoint
 class TrackingService : LifecycleService(){
 
     var isFirstRun = true
+    var serviceDestroyed = false
 
+    @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private val timeRunInSeconds = MutableLiveData<Long>()
+
+    @Inject
+    lateinit var baseNotificationBuilder: NotificationCompat.Builder
+
+    lateinit var currentNotificationBuilder: NotificationCompat.Builder
 
     companion object {
         val timeRunInMillis = MutableLiveData<Long>()
@@ -68,12 +78,23 @@ class TrackingService : LifecycleService(){
 
     override fun onCreate() {
         super.onCreate()
+        currentNotificationBuilder = baseNotificationBuilder
         postInitialValues()
         fusedLocationProviderClient = FusedLocationProviderClient(this)
 
         isTracking.observe(this, Observer {
             updateLocationTracking(it)
+            updateNotificationTrackingState(it)
         })
+    }
+
+    private fun destroyService(){
+        serviceDestroyed = true
+        isFirstRun = true
+        pauseService()
+        postInitialValues()
+        stopForeground(true)
+        stopSelf()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -85,7 +106,6 @@ class TrackingService : LifecycleService(){
                         startForegroundService()
                         isFirstRun = false
                     } else {
-                        Timber.d("Resuming service...")
                         startTimer()
                     }
                 }
@@ -93,7 +113,7 @@ class TrackingService : LifecycleService(){
                     pauseService()
                 }
                 ACTION_STOP_SERVICE -> {
-                    Timber.d("Stopped service")
+                    destroyService()
                 }
             }
         }
@@ -130,6 +150,36 @@ class TrackingService : LifecycleService(){
     private fun pauseService(){
         isTracking.postValue(false)
         isTimerEnabled = false
+    }
+
+    //обновление уведомления
+    private fun updateNotificationTrackingState(isTracking: Boolean) {
+        val notificationActionText = if (isTracking) "Стоп" else "Возобновить"
+        val pendingIntent = if (isTracking) {
+            val pauseIntent = Intent(this, TrackingService::class.java).apply {
+                action = ACTION_PAUSE_SERVICE
+            }
+            PendingIntent.getService(this, 1, pauseIntent, FLAG_UPDATE_CURRENT)
+        } else {
+            val resumeIntent = Intent(this, TrackingService::class.java).apply {
+                action = ACTION_START_OR_RESUME_SERVICE
+            }
+            PendingIntent.getService(this, 2, resumeIntent, FLAG_UPDATE_CURRENT)
+        }
+        //получение ссылки на менеджер уведомлений, чтобы отобразить новое уведомление
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        //удаление всех действий перед обновлением уведомления
+        currentNotificationBuilder.javaClass.getDeclaredField("mActions").apply {
+            isAccessible = true
+            set(currentNotificationBuilder, ArrayList<NotificationCompat.Action>())
+        }
+
+        if (!serviceDestroyed){
+            currentNotificationBuilder = baseNotificationBuilder
+                .addAction(R.drawable.ic_pause_black_24dp, notificationActionText, pendingIntent)
+            notificationManager.notify(NOTIFICATION_ID, currentNotificationBuilder.build())
+        }
     }
 
     //активация отслеживания местоположения
@@ -199,32 +249,18 @@ class TrackingService : LifecycleService(){
             createNotificationChannel(notificationManager)
         }
 
-        //создание фактического уведомления
-        val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-            //отмена скрытия уведомления при нажатии на него
-            .setAutoCancel(false)
-            //уведомление нельзя смахнуть
-            .setOngoing(true)
-            //установка маленького значка
-            .setSmallIcon(R.drawable.ic_directions_run_black_24dp)
-            .setContentTitle("GPS Tracking")
-            .setContentText("00:00:00")
-            //подключение ожидающего интента
-            .setContentIntent(getMainActivityPendingIntent())
-
         //запуск уведомления(передний сервис)
-        startForeground(NOTIFICATION_ID, notificationBuilder.build())
-    }
+        startForeground(NOTIFICATION_ID, baseNotificationBuilder.build())
 
-    //ожидающий Intent
-    private fun getMainActivityPendingIntent() = PendingIntent.getActivity(
-        this,
-        0,
-        Intent(this, MainActivity::class.java).also {
-            it.action = ACTION_SHOW_TRACKING_FRAGMENT
-        },
-        FLAG_UPDATE_CURRENT
-    )
+        //изменение уведомления при увеличении секунд
+        timeRunInSeconds.observe(this, Observer {
+            if (!serviceDestroyed){
+                val notification = currentNotificationBuilder
+                    .setContentText(TrackingUtility.getFormattedStopWatchTime(it * 1000))
+                notificationManager.notify(NOTIFICATION_ID, notification.build())
+            }
+        })
+    }
 
     //создание канала уведомлений
     @RequiresApi(Build.VERSION_CODES.O)

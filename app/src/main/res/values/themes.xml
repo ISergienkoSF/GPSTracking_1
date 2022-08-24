@@ -13,4 +13,16 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style parent="ThemeOverlay.MaterialComponents.Dialog.Alert" name="AlertDialogTheme">
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+    </style>
+    <style parent="Widget.MaterialComponents.Button.TextButton.Dialog" name="NegativeButtonStyle">
+        <item name="android:textColor">@color/purple_500</item>
+    </style>
+    <style parent="Widget.MaterialComponents.Button.TextButton.Dialog" name="PositiveButtonStyle">
+        <item name="android:textColor">@color/purple_500</item>
+    </style>
+
 </resources>
