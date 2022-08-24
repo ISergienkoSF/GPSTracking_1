@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clInnerLayout"
+        android:id="@+id/innerLayoutConstraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/purple_700"
@@ -17,39 +17,39 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvTimer"
+            android:id="@+id/timerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00:00:00"
             android:textSize="50sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnToggleRun"
+            app:layout_constraintBottom_toTopOf="@+id/toggleRunButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnToggleRun"
+            android:id="@+id/toggleRunButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start"
+            android:text="Старт"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnFinishRun"
+            app:layout_constraintEnd_toStartOf="@+id/finishRunButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTimer" />
+            app:layout_constraintTop_toBottomOf="@+id/timerTextView" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFinishRun"
+            android:id="@+id/finishRunButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Finish run"
+            android:text="Конец"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnToggleRun"
-            app:layout_constraintTop_toBottomOf="@+id/tvTimer" />
+            app:layout_constraintStart_toEndOf="@+id/toggleRunButton"
+            app:layout_constraintTop_toBottomOf="@+id/timerTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,7 +61,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/clInnerLayout"
+        app:layout_constraintStart_toEndOf="@+id/innerLayoutConstraintLayout"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

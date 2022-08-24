@@ -6,20 +6,20 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvWelcome"
+        android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Welcome!\nPlease enter your name and weight."
         android:textAlignment="center"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/tilName"
+        app:layout_constraintBottom_toTopOf="@+id/nameTextInput"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilName"
+        android:id="@+id/nameTextInput"
         android:layout_width="210dp"
         android:layout_height="52dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
@@ -29,25 +29,25 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etName"
+            android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="15"
             android:hint="Your Name"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilWeight"
+        android:id="@+id/weightTextInput"
         android:layout_width="209dp"
         android:layout_height="52dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/tilName"
-        app:layout_constraintTop_toBottomOf="@+id/tilName">
+        app:layout_constraintStart_toStartOf="@+id/nameTextInput"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextInput">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etWeight"
+            android:id="@+id/weightEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ems="10"
@@ -57,15 +57,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tvWeight"
+        android:id="@+id/weightTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="kg"
+        android:text="кг."
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tilWeight"
-        app:layout_constraintLeft_toRightOf="@id/tilWeight"
-        app:layout_constraintTop_toTopOf="@+id/tilWeight" />
+        app:layout_constraintBottom_toBottomOf="@+id/weightTextInput"
+        app:layout_constraintLeft_toRightOf="@id/weightTextInput"
+        app:layout_constraintTop_toTopOf="@+id/weightTextInput" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -79,10 +79,10 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/tvContinue"
+            android:id="@+id/continueTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Continue"
+            android:text="Продолжить"
             android:textColor="@color/colorAccent"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"

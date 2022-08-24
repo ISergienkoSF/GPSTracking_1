@@ -7,28 +7,28 @@
     android:padding="16dp">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/nameTextInput"
+        android:layout_width="210dp"
+        android:layout_height="52dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/tilWeight"
+        app:layout_constraintBottom_toTopOf="@+id/weightTextInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etName"
+            android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Your Name"
+            android:ems="15"
+            android:hint="Ваше имя"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilWeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/weightTextInput"
+        android:layout_width="210dp"
+        android:layout_height="52dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -36,24 +36,24 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etWeight"
+            android:id="@+id/weightEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Your Weight"
+            android:hint="Ваш вес"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnApplyChanges"
+        android:id="@+id/applyChangesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Apply Changes"
+        android:text="Принять изменения"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilWeight" />
+        app:layout_constraintTop_toBottomOf="@+id/weightTextInput" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

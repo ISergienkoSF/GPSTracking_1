@@ -31,8 +31,13 @@ import com.viol4tsf.gpstracking.other.Constants.LOCATION_UPDATE_INTERVAL
 import com.viol4tsf.gpstracking.other.Constants.NOTIFICATION_CHANNEL_ID
 import com.viol4tsf.gpstracking.other.Constants.NOTIFICATION_CHANNEL_NAME
 import com.viol4tsf.gpstracking.other.Constants.NOTIFICATION_ID
+import com.viol4tsf.gpstracking.other.Constants.TIMER_UPDATE_INTERVAL
 import com.viol4tsf.gpstracking.other.TrackingUtility
 import com.viol4tsf.gpstracking.ui.MainActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 typealias Polyline = MutableList<LatLng> //список координат
@@ -45,7 +50,10 @@ class TrackingService : LifecycleService(){
 
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
+    private val timeRunInSeconds = MutableLiveData<Long>()
+
     companion object {
+        val timeRunInMillis = MutableLiveData<Long>()
         val isTracking = MutableLiveData<Boolean>()
         val pathPoints = MutableLiveData<Polylines>() //координаты
     }
@@ -54,6 +62,8 @@ class TrackingService : LifecycleService(){
     private fun postInitialValues(){
         isTracking.postValue(false)
         pathPoints.postValue(mutableListOf())
+        timeRunInSeconds.postValue(0L)
+        timeRunInMillis.postValue(0L)
     }
 
     override fun onCreate() {
@@ -76,10 +86,11 @@ class TrackingService : LifecycleService(){
                         isFirstRun = false
                     } else {
                         Timber.d("Resuming service...")
+                        startTimer()
                     }
                 }
                 ACTION_PAUSE_SERVICE -> {
-                    Timber.d("Paused service")
+                    pauseService()
                 }
                 ACTION_STOP_SERVICE -> {
                     Timber.d("Stopped service")
@@ -87,6 +98,38 @@ class TrackingService : LifecycleService(){
             }
         }
         return super.onStartCommand(intent, flags, startId)
+    }
+
+    private var isTimerEnabled = false
+    private var lapTime = 0L //начальное время запуска для определения промежутков
+    private var timeRun = 0L //общее время прогулки
+    private var timeStarted = 0L //время запуска прогулки
+    private var lastSecondTimestamp = 0L //последнее значение целой секунды
+
+    private fun startTimer(){
+        addEmptyPolyline()
+        isTracking.postValue(true)
+        timeStarted = System.currentTimeMillis()
+        isTimerEnabled = true
+        //создание потока с помощью корутин
+        CoroutineScope(Dispatchers.Main).launch {
+            while (isTracking.value!!) {
+                //разница между текущим временем и временем старта
+                lapTime = System.currentTimeMillis() - timeStarted
+                timeRunInMillis.postValue(timeRun + lapTime)
+                if (timeRunInMillis.value!! >= lastSecondTimestamp + 1000L) {
+                    timeRunInSeconds.postValue(timeRunInSeconds.value!! + 1)
+                    lastSecondTimestamp += 1000L
+                }
+                delay(TIMER_UPDATE_INTERVAL)
+            }
+            timeRun += lapTime
+        }
+    }
+
+    private fun pauseService(){
+        isTracking.postValue(false)
+        isTimerEnabled = false
     }
 
     //активация отслеживания местоположения
@@ -145,7 +188,7 @@ class TrackingService : LifecycleService(){
     //функция для фактического запуска службы
     private fun startForegroundService() {
 
-        addEmptyPolyline()
+        startTimer()
         isTracking.postValue(true)
 
         //служба уведомлений
