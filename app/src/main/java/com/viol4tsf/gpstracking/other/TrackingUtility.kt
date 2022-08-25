@@ -2,7 +2,9 @@ package com.viol4tsf.gpstracking.other
 
 import android.Manifest
 import android.content.Context
+import android.location.Location
 import android.os.Build
+import com.viol4tsf.gpstracking.services.Polyline
 import pub.devrel.easypermissions.EasyPermissions
 import java.util.concurrent.TimeUnit
 
@@ -45,5 +47,25 @@ object TrackingUtility {
                 "${if (minutes < 10) "0" else ""}$minutes:" +
                 "${if (seconds < 10) "0" else ""}$seconds:" +
                 "${if (milliseconds < 10) "0" else ""}$milliseconds"
+    }
+
+    fun calculatePolylineLength(polyline: Polyline): Float{
+        var distance = 0f
+        for (i in 0..polyline.size - 2){
+            val positionF = polyline[i]
+            val positionS = polyline[i + 1]
+
+            val result = FloatArray(1)
+            //расстояние между двумя линиями
+            Location.distanceBetween(
+                positionF.latitude,
+                positionF.longitude,
+                positionS.latitude,
+                positionS.longitude,
+                result
+            )
+            distance += result[0]
+        }
+        return distance
     }
 }

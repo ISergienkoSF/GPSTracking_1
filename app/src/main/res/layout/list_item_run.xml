@@ -7,7 +7,7 @@
     android:padding="8dp">
 
     <ImageView
-        android:id="@+id/runImageImageView"
+        android:id="@+id/runImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toStartOf="@+id/timeTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/runImageImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/runImageView" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/timeTextView"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toStartOf="@+id/distanceTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/dateTextView"
-        app:layout_constraintTop_toBottomOf="@+id/runImageImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/runImageView" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/distanceTextView"
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toStartOf="@+id/avgSpeedTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/timeTextView"
-        app:layout_constraintTop_toBottomOf="@+id/runImageImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/runImageView" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/avgSpeedTextView"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toStartOf="@+id/caloriesTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/distanceTextView"
-        app:layout_constraintTop_toBottomOf="@+id/runImageImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/runImageView" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/caloriesTextView"
@@ -68,6 +68,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/avgSpeedTextView"
-        app:layout_constraintTop_toBottomOf="@+id/runImageImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/runImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

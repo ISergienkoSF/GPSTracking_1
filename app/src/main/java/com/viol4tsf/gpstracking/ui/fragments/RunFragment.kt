@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.viol4tsf.gpstracking.R
+import com.viol4tsf.gpstracking.adapters.RunAdapter
 import com.viol4tsf.gpstracking.other.Constants.REQUEST_CODE_LOCATION_PERMISSIONS
 import com.viol4tsf.gpstracking.other.TrackingUtility
 import com.viol4tsf.gpstracking.ui.viewmodels.MainViewModel
@@ -21,12 +24,27 @@ class RunFragment: Fragment(R.layout.fragment_run), EasyPermissions.PermissionCa
 
     private val viewModel: MainViewModel by viewModels()
 
+    private lateinit var runAdapter: RunAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requestPermissions()
+        setupRecyclerView()
+
+        viewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {
+            runAdapter.submitList(it)
+        })
+
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
+    }
+
+    private fun setupRecyclerView() = runsRecyclerView.apply {
+        runAdapter = RunAdapter()
+        adapter = runAdapter
+        layoutManager = LinearLayoutManager(requireContext())
+
     }
 
     private fun requestPermissions() {
