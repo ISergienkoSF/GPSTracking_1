@@ -1,9 +1,15 @@
 package com.viol4tsf.gpstracking.di
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.viol4tsf.gpstracking.other.Constants.RUNNING_DB_NAME
 import com.viol4tsf.gpstracking.db.RunningDatabase
+import com.viol4tsf.gpstracking.other.Constants.KEY_FIRST_TIME_TOGGLE
+import com.viol4tsf.gpstracking.other.Constants.KEY_NAME
+import com.viol4tsf.gpstracking.other.Constants.KEY_WEIGHT
+import com.viol4tsf.gpstracking.other.Constants.SHARED_PREFERENCES_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,4 +34,26 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRunDao(db: RunningDatabase) = db.getRunDao()
+
+    //предоставление настроек
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(@ApplicationContext app: Context) =
+        app.getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE)
+
+    //предоставление имени. ?: НУЖНО ВСЕГДА ПИСАТЬ СО СТРОКАМИ
+    @Singleton
+    @Provides
+    fun provideName(sharedPreferences: SharedPreferences) = sharedPreferences.getString(KEY_NAME, "") ?:""
+
+    //предоставление веса
+    @Singleton
+    @Provides
+    fun provideWeight(sharedPreferences: SharedPreferences) = sharedPreferences.getFloat(KEY_WEIGHT, 65f)
+
+    //предоставление первого запуска
+    @Singleton
+    @Provides
+    fun provideFirstTimeToggle(sharedPreferences: SharedPreferences) =
+        sharedPreferences.getBoolean(KEY_FIRST_TIME_TOGGLE, true)
 }

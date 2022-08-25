@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.viol4tsf.gpstracking.R
 import com.viol4tsf.gpstracking.adapters.RunAdapter
 import com.viol4tsf.gpstracking.other.Constants.REQUEST_CODE_LOCATION_PERMISSIONS
+import com.viol4tsf.gpstracking.other.SortType
 import com.viol4tsf.gpstracking.other.TrackingUtility
 import com.viol4tsf.gpstracking.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +33,30 @@ class RunFragment: Fragment(R.layout.fragment_run), EasyPermissions.PermissionCa
         requestPermissions()
         setupRecyclerView()
 
-        viewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {
+        when(viewModel.sortType){
+            SortType.DATE -> filterSpinner.setSelection(0)
+            SortType.RUNNING_TIME -> filterSpinner.setSelection(1)
+            SortType.DISTANCE -> filterSpinner.setSelection(2)
+            SortType.AVG_SPEED -> filterSpinner.setSelection(3)
+            SortType.CALORIES_BURNED -> filterSpinner.setSelection(4)
+        }
+
+        filterSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when(position){
+                    0 -> viewModel.sortRuns(SortType.DATE)
+                    1 -> viewModel.sortRuns(SortType.RUNNING_TIME)
+                    2 -> viewModel.sortRuns(SortType.DISTANCE)
+                    3 -> viewModel.sortRuns(SortType.AVG_SPEED)
+                    4 -> viewModel.sortRuns(SortType.CALORIES_BURNED)
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+
+        }
+
+        viewModel.runs.observe(viewLifecycleOwner, Observer {
             runAdapter.submitList(it)
         })
 
