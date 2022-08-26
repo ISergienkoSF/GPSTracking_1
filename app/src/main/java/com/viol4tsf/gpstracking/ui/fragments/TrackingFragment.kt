@@ -1,10 +1,8 @@
 package com.viol4tsf.gpstracking.ui.fragments
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.core.view.MenuHost
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -13,7 +11,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.viol4tsf.gpstracking.R
 import com.viol4tsf.gpstracking.db.Run
@@ -32,6 +29,8 @@ import kotlinx.android.synthetic.main.fragment_tracking.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.math.round
+
+const val CANCEL_TRACKING_DIALOG_TAG = "CancelDialog"
 
 @AndroidEntryPoint
 class TrackingFragment: Fragment(R.layout.fragment_tracking){
@@ -80,18 +79,11 @@ class TrackingFragment: Fragment(R.layout.fragment_tracking){
     }
 
     private fun showCancelTrackingDialog(){
-        val dialog = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
-            .setTitle("Выйти из прогулки?")
-            .setMessage("Вы уверены что хотите покунить текущую прогулку? Все данные при этом будут удалены.")
-            .setIcon(R.drawable.ic_baseline_delete_24)
-            .setPositiveButton("Да") {_, _ ->
+        CancelTrackingDialog().apply {
+            setYListener {
                 stopRun()
             }
-            .setNegativeButton("Нет"){dialogInterface, _ ->
-                dialogInterface.cancel()
-            }
-            .create()
-        dialog.show()
+        }.show(parentFragmentManager, CANCEL_TRACKING_DIALOG_TAG)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -106,6 +98,14 @@ class TrackingFragment: Fragment(R.layout.fragment_tracking){
         finishRunButton.setOnClickListener {
             zoomToSeeAllTrack()
             endRunAndSaveToDB()
+        }
+
+        if (savedInstanceState != null){
+            val cancelTrackingDialog = parentFragmentManager
+                .findFragmentByTag(CANCEL_TRACKING_DIALOG_TAG) as CancelTrackingDialog?
+            cancelTrackingDialog?.setYListener {
+                stopRun()
+            }
         }
 
         //загрузка карты в представление
@@ -147,6 +147,7 @@ class TrackingFragment: Fragment(R.layout.fragment_tracking){
     }
 
     private fun stopRun(){
+        timerTextView.text = "00:00:00:00"
         sendCommandToService(ACTION_STOP_SERVICE)
         findNavController().navigate(R.id.action_trackingFragment_to_runFragment)
     }
@@ -154,10 +155,10 @@ class TrackingFragment: Fragment(R.layout.fragment_tracking){
     //отслеживание изменений
     private fun updateTracking(isTracking: Boolean){
         this.isTracking = isTracking
-        if (!isTracking){
+        if (!isTracking && currentTimeInMillis > 0L){
             toggleRunButton.text = "Старт"
             finishRunButton.visibility = View.VISIBLE
-        } else {
+        } else if (isTracking){
             toggleRunButton.text = "Стоп"
             menu?.getItem(0)?.isVisible = true
             finishRunButton.visibility = View.GONE

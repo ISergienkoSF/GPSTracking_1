@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
+        //не проделывать никаких действий при повторном переходе на тот же фрагмент
+        bottomNavigationView.setOnNavigationItemReselectedListener { /* NO-OP */ }
 
         //прослушивание изменений для нижней навигации и скрытие панели в некоторых фрагментах
         navHostFragment.findNavController()
