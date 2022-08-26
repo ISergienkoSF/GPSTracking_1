@@ -53,7 +53,6 @@ class RunFragment: Fragment(R.layout.fragment_run), EasyPermissions.PermissionCa
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
-
         }
 
         viewModel.runs.observe(viewLifecycleOwner, Observer {
@@ -69,7 +68,6 @@ class RunFragment: Fragment(R.layout.fragment_run), EasyPermissions.PermissionCa
         runAdapter = RunAdapter()
         adapter = runAdapter
         layoutManager = LinearLayoutManager(requireContext())
-
     }
 
     private fun requestPermissions() {
@@ -79,7 +77,7 @@ class RunFragment: Fragment(R.layout.fragment_run), EasyPermissions.PermissionCa
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             EasyPermissions.requestPermissions(
                 this,
-                "You need to accept location permissions to use this app.",
+                "Вам нужно разрешить доступ к местоположению для использования данного приложения.",
                 REQUEST_CODE_LOCATION_PERMISSIONS,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -87,7 +85,7 @@ class RunFragment: Fragment(R.layout.fragment_run), EasyPermissions.PermissionCa
         } else {
             EasyPermissions.requestPermissions(
                 this,
-                "You need to accept location permissions to use this app.",
+                "Вам нужно разрешить доступ к местоположению для использования данного приложения.",
                 REQUEST_CODE_LOCATION_PERMISSIONS,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,

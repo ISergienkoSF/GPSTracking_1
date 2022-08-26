@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.GPSTracking" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/appcolor3</item>
+        <item name="colorPrimaryVariant">@color/appcolor2</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -19,10 +19,10 @@
         <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
     </style>
     <style parent="Widget.MaterialComponents.Button.TextButton.Dialog" name="NegativeButtonStyle">
-        <item name="android:textColor">@color/purple_500</item>
+        <item name="android:textColor">@color/appcolor4</item>
     </style>
     <style parent="Widget.MaterialComponents.Button.TextButton.Dialog" name="PositiveButtonStyle">
-        <item name="android:textColor">@color/purple_500</item>
+        <item name="android:textColor">@color/appcolor4</item>
     </style>
 
 </resources>

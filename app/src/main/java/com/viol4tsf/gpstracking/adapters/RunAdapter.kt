@@ -5,6 +5,7 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -19,7 +20,15 @@ import java.util.*
 
 class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>(){
 
-    inner class RunViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    inner class RunViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+        init {
+            itemView.runImageView.setOnLongClickListener { v: View ->
+                val position: Int = adapterPosition
+                Toast.makeText(itemView.context, "dghdfghd", Toast.LENGTH_SHORT).show()
+                return@setOnLongClickListener true
+            }
+        }
+    }
 
     //определение отличий в списке для обновления только определённых элементов
     val diffCallback = object : DiffUtil.ItemCallback<Run>(){

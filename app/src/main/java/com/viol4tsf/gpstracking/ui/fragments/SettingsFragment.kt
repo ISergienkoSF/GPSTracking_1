@@ -51,7 +51,7 @@ class SettingsFragment: Fragment(R.layout.fragment_settings){
             .putString(KEY_NAME, nameText)
             .putFloat(KEY_WEIGHT, weightText.toFloat())
             .apply()
-        val toolbarText = "Вперёд, $$nameText!"
+        val toolbarText = "Вперёд, $nameText!"
         requireActivity().toolbarTitleTextView.text = toolbarText
         return true
     }

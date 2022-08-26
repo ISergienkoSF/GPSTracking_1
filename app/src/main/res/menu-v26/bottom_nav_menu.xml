@@ -3,7 +3,8 @@
 
     <item android:id="@+id/runFragment"
         android:title="Прогулки"
-        android:icon="@drawable/ic_run" />
+        android:icon="@drawable/ic_run"
+        android:iconTint="@color/teal_200"/>
 
     <item android:id="@+id/statisticsFragment"
         android:title="Статистика"

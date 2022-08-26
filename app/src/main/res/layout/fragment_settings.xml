@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/appcolor5"
     android:padding="16dp">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -17,6 +18,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nameEditText"
+            android:background="@color/appcolor6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="15"
@@ -38,6 +40,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/weightEditText"
             android:layout_width="match_parent"
+            android:background="@color/appcolor6"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Ваш вес"

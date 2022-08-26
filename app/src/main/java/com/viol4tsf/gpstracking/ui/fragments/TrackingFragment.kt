@@ -51,7 +51,6 @@ class TrackingFragment: Fragment(R.layout.fragment_tracking){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //val menuHost: MenuHost = requireActivity()
         setHasOptionsMenu(true)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -253,11 +252,13 @@ class TrackingFragment: Fragment(R.layout.fragment_tracking){
     override fun onResume() {
         super.onResume()
         mapView?.onResume()
+        addAllPolylines()
     }
 
     override fun onStart() {
         super.onStart()
         mapView?.onStart()
+        addAllPolylines()
     }
 
     override fun onStop() {

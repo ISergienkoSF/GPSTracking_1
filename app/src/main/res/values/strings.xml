@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">RunningApp</string>
+    <string name="app_name">WalkingApp</string>
     <string-array name="filter_options">
-        <item>Date</item>
-        <item>Running Time</item>
-        <item>Distance</item>
-        <item>Average Speed</item>
-        <item>Calories Burned</item>
+        <item>Дате</item>
+        <item>Времени прогулки</item>
+        <item>Дистанции</item>
+        <item>Средней скорости</item>
+        <item>Сожженным калориям</item>
     </string-array>
     <string name="google_maps_key">AIzaSyC0d6OQwQ6MOx-b_tmvL6SHtsw_Rc5jlBA</string>
 </resources>

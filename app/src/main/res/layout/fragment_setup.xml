@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/appcolor5"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,9 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Welcome!\nPlease enter your name and weight."
+        android:text="Добро пожаловать!\nПожалуйста, введите своё имя и вес."
         android:textAlignment="center"
         android:textSize="36sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/nameTextInput"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -32,8 +34,9 @@
             android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/appcolor6"
             android:ems="15"
-            android:hint="Your Name"
+            android:hint="Ваше имя"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -50,8 +53,9 @@
             android:id="@+id/weightEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/appcolor6"
             android:ems="10"
-            android:hint="Your Weight"
+            android:hint="Ваш вес"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,6 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:textColor="@color/black"
         android:text="кг."
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/weightTextInput"
@@ -71,7 +76,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/purple_200"
+        android:background="@color/appcolor6"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Продолжить"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/appcolor4"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

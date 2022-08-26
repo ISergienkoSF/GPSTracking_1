@@ -9,47 +9,53 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/appcolor6"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/dateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="DATE"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:textColor="@color/appcolor4"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/durationTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="DURATION"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:textColor="@color/appcolor4"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/avgSpeedTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="AVG SPEED"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:textColor="@color/appcolor4"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/distanceTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="DISTANCE"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:textColor="@color/appcolor4"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/caloriesBurnedTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="CALORIES BURNED"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:textColor="@color/appcolor4"
+            android:textSize="20sp" />
 
     </LinearLayout>
 

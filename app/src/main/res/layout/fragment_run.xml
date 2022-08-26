@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/appcolor5"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,7 +20,8 @@
         android:id="@+id/filterByTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sort by:"
+        android:text="Сортировать по:"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/filterSpinner"
         app:layout_constraintEnd_toStartOf="@+id/filterSpinner"
@@ -40,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add_black"
-        app:backgroundTint="@color/colorAccent"
+        app:backgroundTint="@color/appcolor3"
         app:fabSize="normal"
         app:rippleColor="@android:color/white"
         android:layout_marginEnd="32dp"
