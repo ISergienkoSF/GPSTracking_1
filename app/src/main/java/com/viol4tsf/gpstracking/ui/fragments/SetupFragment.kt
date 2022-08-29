@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.viol4tsf.gpstracking.R
 import com.viol4tsf.gpstracking.other.Constants.KEY_FIRST_TIME_TOGGLE
+import com.viol4tsf.gpstracking.other.Constants.KEY_HEIGHT
 import com.viol4tsf.gpstracking.other.Constants.KEY_NAME
 import com.viol4tsf.gpstracking.other.Constants.KEY_WEIGHT
 import dagger.hilt.android.AndroidEntryPoint

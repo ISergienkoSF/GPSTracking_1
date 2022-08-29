@@ -1,5 +1,6 @@
 package com.viol4tsf.gpstracking.adapters
 
+import android.app.AlertDialog
 import android.icu.util.Calendar
 import android.os.Build
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,21 +16,15 @@ import com.bumptech.glide.Glide
 import com.viol4tsf.gpstracking.R
 import com.viol4tsf.gpstracking.db.Run
 import com.viol4tsf.gpstracking.other.TrackingUtility
+import com.viol4tsf.gpstracking.ui.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.list_item_run.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>(){
+class RunAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<RunAdapter.RunViewHolder>(){
 
-    inner class RunViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        init {
-            itemView.runImageView.setOnLongClickListener { v: View ->
-                val position: Int = adapterPosition
-                Toast.makeText(itemView.context, "dghdfghd", Toast.LENGTH_SHORT).show()
-                return@setOnLongClickListener true
-            }
-        }
-    }
+
+    inner class RunViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     //определение отличий в списке для обновления только определённых элементов
     val diffCallback = object : DiffUtil.ItemCallback<Run>(){
@@ -74,6 +70,22 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>(){
             timeTextView.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)
             val caloriesBurned = "${run.caloriesBurned}ккал"
             caloriesTextView.text = caloriesBurned
+            runImageView.setOnLongClickListener { v: View ->
+                val builder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
+                    .setTitle("Удалить запись?")
+                    .setMessage("Вы уверены что хотите удалить выбранную прогулку?")
+                    .setIcon(R.drawable.ic_baseline_delete_24)
+                    .setPositiveButton("Да") {_, _ ->
+                        viewModel.deleteRun(run)
+                    }
+                    .setNegativeButton("Нет"){dialogInterface, _ ->
+                        dialogInterface.cancel()
+                    }
+                val alertDialog: AlertDialog = builder.create()
+                alertDialog.setCancelable(true)
+                alertDialog.show()
+                return@setOnLongClickListener true
+            }
         }
     }
 

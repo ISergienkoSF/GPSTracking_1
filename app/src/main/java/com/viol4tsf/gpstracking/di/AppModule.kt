@@ -6,6 +6,8 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.viol4tsf.gpstracking.other.Constants.RUNNING_DB_NAME
 import com.viol4tsf.gpstracking.db.RunningDatabase
+import com.viol4tsf.gpstracking.other.Constants.KEY_CALORIES
+import com.viol4tsf.gpstracking.other.Constants.KEY_DISTANCE
 import com.viol4tsf.gpstracking.other.Constants.KEY_FIRST_TIME_TOGGLE
 import com.viol4tsf.gpstracking.other.Constants.KEY_NAME
 import com.viol4tsf.gpstracking.other.Constants.KEY_WEIGHT
@@ -50,6 +52,16 @@ object AppModule {
     @Singleton
     @Provides
     fun provideWeight(sharedPreferences: SharedPreferences) = sharedPreferences.getFloat(KEY_WEIGHT, 65f)
+
+    @Singleton
+    @Provides
+    fun provideDistance(sharedPreferences: SharedPreferences) = sharedPreferences.getLong(
+        KEY_DISTANCE, 2000L)
+
+    @Singleton
+    @Provides
+    fun provideCalories(sharedPreferences: SharedPreferences) = sharedPreferences.getInt(
+        KEY_CALORIES, 100)
 
     //предоставление первого запуска
     @Singleton

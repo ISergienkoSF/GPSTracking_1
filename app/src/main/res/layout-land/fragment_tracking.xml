@@ -17,15 +17,140 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="32dp"
+            android:gravity="center"
+            android:text="Расстоние"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/distanceCircularProgressBar"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_centerInParent="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cpb_background_progressbar_color="@color/appcolor6"
+            app:cpb_background_progressbar_width="15dp"
+            app:cpb_progress_max="200"
+            app:cpb_progressbar_color="@color/appcolor4"
+            app:cpb_progressbar_width="12dp"
+            app:cpb_round_border="true"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/distanceProgressTextView"
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/distanceCircularProgressBar"
+            app:layout_constraintEnd_toEndOf="@+id/distanceCircularProgressBar"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/distanceCircularProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/distanceCircularProgressBar"
+            app:layout_constraintVertical_bias="0.37" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/maxDistanceTextView"
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:gravity="center"
+            android:text="/2500"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/distanceCircularProgressBar"
+            app:layout_constraintEnd_toEndOf="@+id/distanceCircularProgressBar"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/distanceCircularProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/distanceCircularProgressBar"
+            app:layout_constraintVertical_bias="0.62" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="44dp"
+            android:gravity="center"
+            android:text="Калории"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/caloriesCircularProgressBar"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            app:cpb_background_progressbar_color="@color/appcolor6"
+            app:cpb_background_progressbar_width="15dp"
+            app:cpb_progress_max="200"
+            app:cpb_progressbar_color="@color/appcolor4"
+            app:cpb_progressbar_width="12dp"
+            app:cpb_round_border="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/caloriesProgressTextView"
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/caloriesCircularProgressBar"
+            app:layout_constraintEnd_toEndOf="@+id/caloriesCircularProgressBar"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/caloriesCircularProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/caloriesCircularProgressBar"
+            app:layout_constraintVertical_bias="0.37" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/maxCaloriesTextView"
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:gravity="center"
+            android:text="/200"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/caloriesCircularProgressBar"
+            app:layout_constraintEnd_toEndOf="@+id/caloriesCircularProgressBar"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/caloriesCircularProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/caloriesCircularProgressBar"
+            app:layout_constraintVertical_bias="0.62" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/timerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:layout_marginTop="184dp"
             android:text="00:00:00"
+            android:textColor="@color/black"
             android:textSize="50sp"
-            app:layout_constraintBottom_toTopOf="@+id/toggleRunButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,6 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Старт"
+            android:background="@drawable/custom_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/finishRunButton"
             app:layout_constraintHorizontal_bias="0.5"
@@ -45,6 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Конец"
+            android:background="@drawable/custom_button"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

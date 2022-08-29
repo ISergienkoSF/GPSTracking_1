@@ -65,7 +65,7 @@ class RunFragment: Fragment(R.layout.fragment_run), EasyPermissions.PermissionCa
     }
 
     private fun setupRecyclerView() = runsRecyclerView.apply {
-        runAdapter = RunAdapter()
+        runAdapter = RunAdapter(viewModel)
         adapter = runAdapter
         layoutManager = LinearLayoutManager(requireContext())
     }

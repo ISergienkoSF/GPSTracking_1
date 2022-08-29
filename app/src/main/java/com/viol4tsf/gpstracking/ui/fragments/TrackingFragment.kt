@@ -40,11 +40,18 @@ class TrackingFragment: Fragment(R.layout.fragment_tracking){
     private var pathPoints = mutableListOf<Polyline>()
     private var map: GoogleMap? = null
     private var currentTimeInMillis = 0L
+    private var totalDistance = 0f
 
     private var menu: Menu? = null
 
     @set:Inject
     var weight = 65f
+
+    @set:Inject
+    var distance = 2000L
+
+    @set:Inject
+    var calories = 100
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,6 +97,11 @@ class TrackingFragment: Fragment(R.layout.fragment_tracking){
         //контроль ЖЦ представления карты
         mapView.onCreate(savedInstanceState)
 
+        maxDistanceTextView.text = "/${distance}"
+        maxCaloriesTextView.text = "/${calories}"
+        distanceCircularProgressBar.progressMax = distance.toFloat()
+        caloriesCircularProgressBar.progressMax = calories.toFloat()
+
         toggleRunButton.setOnClickListener{
             toggleRun()
         }
@@ -126,6 +138,19 @@ class TrackingFragment: Fragment(R.layout.fragment_tracking){
             pathPoints = it
             addLatestPolyline()
             moveCameraToUser()
+            var distanceInMeters = 0
+            for (polyline in pathPoints){
+                distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
+            }
+            val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
+            distanceProgressTextView.text = distanceInMeters.toString()
+            caloriesProgressTextView.text = caloriesBurned.toString()
+            distanceCircularProgressBar.apply {
+                setProgressWithAnimation(distanceInMeters.toFloat())
+            }
+            caloriesCircularProgressBar.apply {
+                setProgressWithAnimation(caloriesBurned.toFloat())
+            }
         })
 
         TrackingService.timeRunInMillis.observe(viewLifecycleOwner, Observer {

@@ -54,11 +54,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/appcolor6"
-            android:ems="10"
+            android:ems="3"
             android:hint="Ваш вес"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <TextView
         android:id="@+id/weightTextView"
@@ -90,6 +92,7 @@
             android:text="Продолжить"
             android:textColor="@color/appcolor4"
             android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
